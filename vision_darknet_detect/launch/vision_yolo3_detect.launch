@@ -7,7 +7,8 @@
   <arg name="pretrained_model_file" default="$(find vision_darknet_detect)/darknet/data/yolov3.weights"/>
   <arg name="names_file" default="$(find vision_darknet_detect)/darknet/cfg/coco.names"/>
 
-  <arg name="image_src" default="/image_raw"/>
+  <arg name="input_topic" default="/image_raw"/>
+  <arg name="output_topic" default="/rois"/>
 
   <node pkg="vision_darknet_detect" name="vision_darknet_detect" type="vision_darknet_detect" output="screen">
     <param name="network_definition_file" type="str" value="$(arg network_definition_file)"/>
@@ -15,8 +16,9 @@
     <param name="score_threshold" type="double" value="$(arg score_threshold)"/>
     <param name="nms_threshold" type="double" value="$(arg nms_threshold)"/>
     <param name="gpu_device_id" type="int" value="$(arg gpu_device_id)"/>
-    <param name="image_raw_node" type="str" value="$(arg image_src)"/>
+    <param name="image_raw_node" type="str" value="$(arg input_topic)"/>
     <param name="names_file" type="str" value="$(arg names_file)"/>
+    <remap from="~rois" to="$(arg output_topic)"/>
   </node>
 
 </launch>

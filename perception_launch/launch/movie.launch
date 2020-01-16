@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<launch>
+    <include file="$(find perception_launch)/launch/perception.launch">
+        <arg name="mode" default="camera_lidar_fusion"/>
+    </include>
+
+    <node pkg="rosbag" type="play" name="player" output="screen" args="--clock $(find perception_launch)/data/2020-01-10-18-31-21.bag"/>
+</launch>
